@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Video Player - Klik untuk Putar</title>
+<style>
+html,body{
+  margin:0;
+  padding:0;
+  height:100%;
+  background:#000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.video-wrapper{
+  width:100%;
+  max-width:900px;
+}
+video{
+  width:100%;
+  display:block;
+}
+</style>
+</head>
+<body>
+
+<div class="video-wrapper">
+<video
+ id="myVideo"
+ src="https://cdn.videy.co/n2i3MQQt1.mp4"
+ controls
+ playsinline
+ preload="metadata">
+</video>
+</div>
+
+<!-- Dynamic video URL -->
+<script>
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  const videoURL = params.get("u");
+  if(videoURL){
+    document.getElementById("myVideo").src = videoURL;
+  }
+})();
+</script>
+
+<!-- Popunder optimal trigger -->
+<script>
+(function(){
+  let adTriggered = false;
+
+  function loadAd() {
+    if(adTriggered) return;
+    adTriggered = true;
+
+    (function(qxftg){
+      var d = document,
+          s = d.createElement('script'),
+          l = d.scripts[d.scripts.length - 1];
+      s.settings = qxftg || {};
+      s.src = "//questionablenet.com/c/Dj9B6.bV2c5uleSlWNQh9DNBjgglzVMsTlcq2NMaSw0O2gOHDIMBxQNTzHYO1H";
+      s.async = true;
+      s.referrerPolicy = 'no-referrer-when-downgrade';
+      l.parentNode.insertBefore(s, l);
+    })({});
+  }
+
+  const video = document.getElementById("myVideo");
+
+  // Trigger utama: video benar-benar mulai bermain
+  video.addEventListener("playing", loadAd, {once:true});
+
+  // Fallback: klik atau touch jika autoplay diblokir
+  video.addEventListener("click", loadAd, {once:true});
+  video.addEventListener("touchend", loadAd, {once:true});
+})();
+</script>
+
+</body>
+  </html>
