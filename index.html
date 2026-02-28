@@ -47,37 +47,34 @@ video{
 })();
 </script>
 
-<!-- Popunder optimal trigger -->
+<!-- ✅ POPUNDER ONLY ONCE -->
 <script>
 (function(){
-  let adTriggered = false;
+  let adTriggered = false; // ✅ flag tunggal
 
-  function loadAd() {
-    if(adTriggered) return;
+  function loadAdOnce() {
+    if(adTriggered) return; // hanya sekali
     adTriggered = true;
 
-    (function(qxftg){
-      var d = document,
-          s = d.createElement('script'),
-          l = d.scripts[d.scripts.length - 1];
-      s.settings = qxftg || {};
-      s.src = "//questionablenet.com/c/Dj9B6.bV2c5uleSlWNQh9DNBjgglzVMsTlcq2NMaSw0O2gOHDIMBxQNTzHYO1H";
-      s.async = true;
-      s.referrerPolicy = 'no-referrer-when-downgrade';
-      l.parentNode.insertBefore(s, l);
-    })({});
+    var s = document.createElement("script");
+    s.src = "https://pl28813216.effectivegatecpm.com/c2/8d/90/c28d90d262691adf427b9750aaf757dc.js";
+    s.async = true;
+    document.body.appendChild(s);
   }
 
   const video = document.getElementById("myVideo");
 
-  // Trigger utama: video benar-benar mulai bermain
-  video.addEventListener("playing", loadAd, {once:true});
+  // Semua trigger user pertama digabung
+  function triggerAd() {
+    loadAdOnce();
+  }
 
-  // Fallback: klik atau touch jika autoplay diblokir
-  video.addEventListener("click", loadAd, {once:true});
-  video.addEventListener("touchend", loadAd, {once:true});
+  // Hanya event pertama saja
+  video.addEventListener("play", triggerAd, {once:true});
+  video.addEventListener("click", triggerAd, {once:true});
+  video.addEventListener("touchend", triggerAd, {once:true});
 })();
 </script>
 
 </body>
-  </html>
+</html>
